@@ -16,9 +16,9 @@ from sklearn.metrics import confusion_matrix
 #from tensorflow.keras.models import Sequential, load_model
 #from tensorflow.keras.layers import Dense, Dropout, LeakyReLU
 #from tensorflow.keras.utils import to_categorical
-from tensorflow.keras.callbacks import ModelCheckpoint
+#from tensorflow.keras.callbacks import ModelCheckpoint
 
-from tensorflow.keras.models import load_model
+#from tensorflow.keras.models import load_model
 
 
 ##############
