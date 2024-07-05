@@ -6,4 +6,5 @@ seaborn
 scikit-learn
 wordcloud
 spacy
-STOP_WORDS
+selenium
+bs4
