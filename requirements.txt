@@ -9,3 +9,4 @@ tensorflow
 nltk
 wordcloud
 unidecode
+nltk.corpus
