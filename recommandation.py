@@ -24,7 +24,10 @@ from sklearn.metrics import confusion_matrix
 ##############
 from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
 from wordcloud import WordCloud
-import spacy
+
+#import spacy
+#from spacy.lang.fr.stop_words import STOP_WORDS
+
 import time
 
 import selenium.webdriver
@@ -34,10 +37,9 @@ import requests
 
 import pickle
 # Initialiser la variable des mots vides
-#stop_words = list(stopwords.words('french'))
 
 
-from spacy.lang.fr.stop_words import STOP_WORDS
+
 
 stop_words_fr = list(spacy.lang.fr.stop_words.STOP_WORDS)
 stop_words_fr.extend('nbsp'.split())
