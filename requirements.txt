@@ -4,5 +4,6 @@ pandas
 plotly
 seaborn
 scikit-learn
-tensorflow.keras
+tensorflow
+keras
 nltk
