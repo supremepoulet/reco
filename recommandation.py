@@ -43,7 +43,7 @@ stop_words_fr = list(spacy.lang.fr.stop_words.STOP_WORDS)
 
 wc = WordCloud(background_color="white", max_words=100, stopwords=stop_words_fr, max_font_size=50, random_state=42)
 
-stop_words.extend('nbsp'.split())
+#stop_words.extend('nbsp'.split())
 stop_words_fr.extend('nbsp'.split())
 
 import time
