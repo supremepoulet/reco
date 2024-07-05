@@ -9,4 +9,3 @@ tensorflow
 nltk
 wordcloud
 unidecode
-stopwords
