@@ -13,10 +13,13 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import confusion_matrix
 
-from tensorflow.keras.models import Sequential, load_model
-from tensorflow.keras.layers import Dense, Dropout, LeakyReLU
-from tensorflow.keras.utils import to_categorical
+#from tensorflow.keras.models import Sequential, load_model
+#from tensorflow.keras.layers import Dense, Dropout, LeakyReLU
+#from tensorflow.keras.utils import to_categorical
 from tensorflow.keras.callbacks import ModelCheckpoint
+
+from tensorflow.keras.models import load_model
+
 
 ##############
 from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
@@ -164,7 +167,7 @@ count_vectorizer = CountVectorizer(stop_words=stop_words_fr, strip_accents='asci
 
 st.title("Freework")
 st.sidebar.title("Sommaire")
-pages=["Classification ML", "Classification DL", "Recommandation"]
+pages=["Classification ML", "Recommandation"]
 page=st.sidebar.radio("Aller vers", pages)
 
 
@@ -240,87 +243,14 @@ if page == pages[0] :
 
 
 
+
+
+
+
 ####################################################################
 ####################################################################
 ####################################################################
 if page == pages[1] : 
-    st.write("### Classification Deep Learning")
-
-
-    text_cols = ['article_tags_word_tok', 'article_cont_word_tok', 'article_title_word_tok', 'description_offre_tok', 'title_word_tok','competences']
-    target_col = 'target'
-
-    X = df_slim[text_cols].apply(lambda x: ' '.join(x.dropna()), axis=1)
-    y = df_slim[target_col]
-
-    # Fixer max_features à 3000
-    max_features = 3000
-
-    # Vectorisation des données textuelles avec la valeur fixée de max_features
-    tfidf = TfidfVectorizer(max_features=max_features)
-    text_features = tfidf.fit_transform(X).toarray()
-
-    # Séparer les données en ensembles d'entraînement et de test
-    X_train, X_test, y_train, y_test = train_test_split(text_features, y, test_size=0.2, random_state=42)
-
-    # Construction du modèle
-    model = Sequential()
-    model.add(Dense(128, input_dim=X_train.shape[1], activation='relu'))
-    model.add(Dropout(0.2))
-    model.add(Dense(64, activation='relu'))
-    model.add(Dense(32, activation='relu'))
-    model.add(Dense(1, activation='sigmoid'))  # Utilisation de 'sigmoid' pour la classification binaire
-
-    model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
-
-
-    weights_file = "models/model_tok_3000.h5" # Marc a crée pleins de modele. j'ai pris un au hasard
-    model.load_weights(weights_file)
-
-
-    # Enregistrement des poids du modèle après chaque epoch
-    checkpoint = ModelCheckpoint(weights_file, save_weights_only=True, save_best_only=True, monitor='val_loss', mode='min')
-
-    # Entraînement du modèle (les cibles restent binaires, pas besoin de to_categorical)
-    history = model.fit(X_train, y_train, epochs=40, batch_size=32, validation_data=(X_test, y_test), callbacks=[checkpoint])
-
-    loss, accuracy = model.evaluate(X_test, y_test)
-    # Affichage de la progression de la fonction de coût et de la précision
-    # Récupérer les valeurs de l'historique
-    train_loss = history.history['loss']
-    val_loss = history.history['val_loss']
-    train_accuracy = history.history['accuracy']
-    val_accuracy = history.history['val_accuracy']
-
-    # Tracer la fonction de coût
-    epochs = range(1, len(train_loss) + 1)
-    
-    fig = plt.figure()
-    plt.plot(epochs, train_loss, 'bo-', label='Training loss')
-    plt.plot(epochs, val_loss, 'ro-', label='Validation loss')
-    plt.title('Training and validation loss')
-    plt.xlabel('Epochs')
-    plt.ylabel('Loss')
-    plt.legend()
-    st.pyplot(fig)
-
-    # Tracer la précision
-    fig = plt.figure()
-    plt.plot(epochs, train_accuracy, 'bo-', label='Training accuracy')
-    plt.plot(epochs, val_accuracy, 'ro-', label='Validation accuracy')
-    plt.title('Training and validation accuracy')
-    plt.xlabel('Epochs')
-    plt.ylabel('Accuracy')
-    plt.legend()
-    st.pyplot(fig)
-
-
-
-
-####################################################################
-####################################################################
-####################################################################
-if page == pages[2] : 
     st.write("### Recommandation")
 
     event = st.dataframe(
