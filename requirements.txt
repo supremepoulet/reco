@@ -4,9 +4,6 @@ pandas
 plotly
 seaborn
 scikit-learn
-keras
-tensorflow
-nltk
 wordcloud
-unidecode
 spacy
+STOP_WORDS
