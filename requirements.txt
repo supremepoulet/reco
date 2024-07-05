@@ -8,3 +8,4 @@ wordcloud
 spacy
 selenium
 bs4
+pickle
